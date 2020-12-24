@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Player_OverWorld.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/melhor_mapa_ever.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/OverWorld.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 1304, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 1048 )
+
+[node name="OverWorld" type="Node"]
+script = ExtResource( 4 )
+
+[node name="melhor_mapa_ever" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Player" type="KinematicBody2D" parent="."]
+position = Vector2( 944, 1336 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1896
+limit_bottom = 1424
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 1240, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 1240, 1424 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 0, 1000 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 1896, 1000 )
+shape = SubResource( 3 )
+
+[node name="Portals" type="Node" parent="."]
+
+[node name="Vodka" type="Area2D" parent="Portals"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portals/Vodka"]
+polygon = PoolVector2Array( 416, 1040, 560, 952, 656, 984, 624, 1104 )
+
+[node name="T-34" type="Area2D" parent="Portals"]
+position = Vector2( 480, -416 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portals/T-34"]
+polygon = PoolVector2Array( 440, 1024, 528, 968, 608, 1008, 520, 1072 )
+
+[node name="Stalin" type="Area2D" parent="Portals"]
+position = Vector2( 680, -400 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portals/Stalin"]
+polygon = PoolVector2Array( 464, 1040, 520, 968, 592, 992, 536, 1080 )
+
+[node name="Putin" type="Area2D" parent="Portals"]
+position = Vector2( 1056, -184 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Portals/Putin"]
+polygon = PoolVector2Array( 424, 1000, 496, 960, 600, 1000, 504, 1080 )

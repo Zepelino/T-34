@@ -1,0 +1,219 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/scenes/Tutorial.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/MonoSpatial.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/Tuto_Enemy.gd" type="Script" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 704, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 128, 200 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 64, 96 )
+
+[node name="Tutorial" type="Node"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [ 3112.0, 1400.0 ]
+}
+
+[node name="Texts" type="Node" parent="."]
+
+[node name="Keys" type="RichTextLabel" parent="Texts"]
+margin_left = 304.0
+margin_top = 464.0
+margin_right = 640.0
+margin_bottom = 576.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]First, press the [color=blue][wave amp=50 freq=2] Arrows[/wave][/color] to walk and aim arround the scene[/center]"
+text = "First, press the  Arrows to walk and aim arround the scene"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump" type="RichTextLabel" parent="Texts"]
+margin_left = 1312.0
+margin_top = 352.0
+margin_right = 1648.0
+margin_bottom = 464.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]You can press [color=blue][wave amp=50 freq=2]Space Bar[/wave][/color] to jump[/center]"
+text = "You can press Space Bar to jump"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump & Dash" type="RichTextLabel" parent="Texts"]
+margin_left = 2784.0
+margin_top = 440.0
+margin_right = 3120.0
+margin_bottom = 544.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]You can jump and press [color=blue][wave amp=50 freq=2]D[/wave][/color] to dash[/center]"
+text = "You can jump and press D to dash"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dash Trough" type="RichTextLabel" parent="Texts"]
+margin_left = 3608.0
+margin_top = 416.0
+margin_right = 3944.0
+margin_bottom = 520.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]You can dash trough some objects, like enemies, and don't take damage[/center]"
+text = "You can dash trough some objects, like enemies, and don't take damage"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crouch" type="RichTextLabel" parent="Texts"]
+margin_left = 4992.0
+margin_top = 464.0
+margin_right = 5328.0
+margin_bottom = 568.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]You can press [color=blue][wave amp=50 freq=2]Arrow Down[/wave][/color] to crouch[/center]"
+text = "You can press Arrow Down to crouch"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crouch & Shoot" type="RichTextLabel" parent="Texts"]
+margin_left = 8800.0
+margin_top = 464.0
+margin_right = 9136.0
+margin_bottom = 568.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Crouch and press [color=blue][wave amp=50 freq=2]F[/wave][/color] to shoot[/center]"
+text = "Crouch and press F to shoot"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="Pol0" type="CollisionPolygon2D" parent="Ground"]
+polygon = PoolVector2Array( -16, 672, 1320, 672, 1320, 608, 1640, 608, 1640, 768, -16, 768 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground/Pol0"]
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+polygon = PoolVector2Array( -16, 672, 1320, 672, 1320, 608, 1640, 608, 1640, 768, -16, 768 )
+
+[node name="Pol1" type="CollisionPolygon2D" parent="Ground"]
+polygon = PoolVector2Array( 1792, 608, 2616, 608, 2616, 776, 1792, 776 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground/Pol1"]
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+polygon = PoolVector2Array( 1792, 608, 2616, 608, 2616, 776, 1792, 776 )
+
+[node name="Pol2" type="CollisionPolygon2D" parent="Ground"]
+position = Vector2( 168, 0 )
+polygon = PoolVector2Array( 3112, 608, 4712, 608, 4712, 680, 6104, 680, 6104, 608, 10192, 608, 10192, 760, 4712, 768, 3112, 768 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground/Pol2"]
+color = Color( 0.121569, 0.121569, 0.121569, 1 )
+polygon = PoolVector2Array( 3112, 608, 4712, 608, 4712, 680, 6104, 680, 6104, 608, 10192, 608, 10192, 760, 4712, 768, 3112, 768 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 200, 440 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_bottom = 720
+
+[node name="Laser" type="Area2D" parent="."]
+position = Vector2( 5568, 624 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser"]
+position = Vector2( 8, 0 )
+shape = SubResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Laser"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -688.0
+margin_top = -8.0
+margin_right = 704.0
+margin_bottom = 8.0
+color = Color( 1, 0, 0, 0.654902 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Barrier" type="Area2D" parent="."]
+position = Vector2( 4088, 408 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrier"]
+shape = SubResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="Barrier"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -200.0
+margin_right = 128.0
+margin_bottom = 200.0
+color = Color( 1, 0.12549, 0.12549, 0.560784 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Laser_Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Enemy" type="KinematicBody2D" parent="." groups=[
+"Enemy",
+]]
+position = Vector2( 9344, 512 )
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Enemy"]
+position = Vector2( 0, -0.144011 )
+scale = Vector2( 2, 3 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+shape = SubResource( 4 )
+
+[node name="Area2D" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Enemy/Area2D"]
+shape = SubResource( 4 )
+
+[node name="shoot" type="Timer" parent="Enemy"]
+wait_time = 2.0
+autostart = true
+
+[node name="Bullets" type="Node" parent="Enemy"]
+[connection signal="body_entered" from="Laser" to="." method="_on_Laser_body_entered"]
+[connection signal="body_exited" from="Laser" to="." method="_on_Laser_body_exited"]
+[connection signal="body_entered" from="Barrier" to="." method="_on_Barrier_body_entered"]
+[connection signal="body_exited" from="Barrier" to="." method="_on_Barrier_body_exited"]
+[connection signal="timeout" from="Laser_Timer" to="." method="_on_Timer_timeout"]
+[connection signal="script_changed" from="Enemy" to="Enemy" method="_on_Enemy_script_changed"]
+[connection signal="body_entered" from="Enemy/Area2D" to="Enemy" method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Enemy/shoot" to="Enemy" method="_on_shoot_timeout"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Sprites/Player/Attack.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Coin.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.43916, 3.54609 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 536, 0, 67, 67 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 536, 67, 67, 67 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Coin" type="Area2D" groups=[
+"Coins",
+]]
+z_index = 1
+script = ExtResource( 2 )
+type = "Coin"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -3.91879, -0.0306671 )
+scale = Vector2( 0.78491, 0.360544 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -10.3552, -7.29209 )
+scale = Vector2( 0.596061, 0.596061 )
+frames = SubResource( 4 )
+playing = true
+flip_h = true
+[connection signal="body_entered" from="." to="." method="_on_Coin_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

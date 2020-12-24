@@ -1,0 +1,130 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/T-34/T-34.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Fonts/MonoSpatial.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scripts/scenes/T-34 scene.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sounds/Dance_of_Knights(não foi ph).wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 640, 24 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 128, 96 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 128, 96 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 32, 36632 )
+
+[node name="T-34 scene" type="Node"]
+script = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 640, 360 )
+current = true
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 316.772, 626.002 )
+
+[node name="Ground" type="StaticBody2D" parent="." groups=[
+"Ground",
+]]
+position = Vector2( 656, 696 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2( -16, 0 )
+shape = SubResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Ground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -720.0
+margin_top = -24.0
+margin_right = 688.0
+margin_bottom = 272.0
+color = Color( 0.109804, 0.109804, 0.109804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T-34" type="KinematicBody2D" parent="." groups=[
+"Enemy",
+]]
+position = Vector2( 1069.3, 576 )
+script = ExtResource( 3 )
+life = 500
+stg1 = 350
+stg2 = 150
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="T-34"]
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="T-34"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="T-34/Area2D"]
+shape = SubResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="T-34"]
+position = Vector2( -2.28882e-05, 7.62939e-06 )
+scale = Vector2( 12.8, 9.6 )
+
+[node name="Sprite" type="Sprite" parent="T-34"]
+modulate = Color( 0, 0.34902, 0.133333, 1 )
+scale = Vector2( 4, 3 )
+texture = ExtResource( 2 )
+
+[node name="spawn_timer" type="Timer" parent="T-34"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Cannons" type="Node" parent="T-34"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="T-34"]
+
+[node name="Label" type="Label" parent="T-34/CanvasLayer"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 135.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 4 )
+text = "POTATO"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Switch_Timer" type="Timer" parent="T-34"]
+wait_time = 16.0
+autostart = true
+
+[node name="Wall" type="StaticBody2D" parent="." groups=[
+"Wall",
+]]
+position = Vector2( 512, 400 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2( 800, -120 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Wall"]
+position = Vector2( -544, -120 )
+shape = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -15.0
+autoplay = true
+[connection signal="body_entered" from="T-34/Area2D" to="T-34" method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="T-34/Area2D" to="T-34" method="_on_Area2D_body_exited"]
+[connection signal="screen_entered" from="T-34/VisibilityNotifier2D" to="T-34" method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="T-34/VisibilityNotifier2D" to="T-34" method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="T-34/spawn_timer" to="T-34" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="T-34/Switch_Timer" to="T-34" method="_on_Switch_Timer_timeout"]
